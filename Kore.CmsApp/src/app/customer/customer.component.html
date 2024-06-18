@@ -1,0 +1,86 @@
+<ng-content *ngIf="!isLoading">
+  <h2 *ngIf="isAddMode">Add Customer</h2>
+  <h2 *ngIf="!isAddMode">Edit Customer</h2>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field *ngIf="!isAddMode" floatLabel="always">
+      <mat-label>Id</mat-label>
+      <input matInput
+             readonly
+             formControlName="id" />
+    </mat-form-field>
+    <br />
+
+    <mat-form-field floatLabel="always">
+      <mat-label>First Name</mat-label>
+      <input matInput
+             formControlName="firstName"
+             required />
+      @if (form.controls['firstName'].invalid) {
+      <mat-error>Required</mat-error>
+      }
+    </mat-form-field>
+    <br />
+
+    <mat-form-field floatLabel="always">
+      <mat-label>Last Name</mat-label>
+      <input matInput
+             formControlName="lastName"
+             required />
+      @if (form.controls['lastName'].invalid) {
+      <mat-error>Required</mat-error>
+      }
+    </mat-form-field>
+    <br />
+
+    <mat-form-field floatLabel="always">
+      <mat-label>Middle Initial</mat-label>
+      <input matInput
+             formControlName="middleInitial"
+             maxlength="1" />
+    </mat-form-field>
+    <br />
+
+    <mat-form-field floatLabel="always">
+      <mat-label>Title</mat-label>
+      <input matInput
+             formControlName="title"
+             required />
+      @if (form.controls['title'].invalid) {
+      <mat-error>Required</mat-error>
+      }
+    </mat-form-field>
+    <br />
+
+    <mat-form-field floatLabel="always">
+      <mat-label>Email</mat-label>
+
+      <input matInput
+             placeholder="pat@example.com"
+             formControlName="email"
+             required />
+
+      @if (form.controls['email'].invalid) {
+      <mat-error>Must be a valid email address</mat-error>
+      }
+    </mat-form-field>
+    <br />
+
+    <mat-form-field floatLabel="always">
+      <mat-label>Phone</mat-label>
+      <input matInput
+             placeholder="555-555-5555"
+             formControlName="phone"
+             minlength="10"
+             required />
+      @if (form.controls['phone'].invalid) {
+      <mat-error>Required</mat-error>
+      }
+
+    </mat-form-field>
+    <br />
+
+    <button mat-raised-button type="button" *ngIf="!isAddMode" (click)="onDelete()" class="mat-warn">Delete</button>
+    <button mat-raised-button type="submit" [disabled]="form.invalid">Save</button>
+  </form>
+</ng-content>
